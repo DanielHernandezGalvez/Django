@@ -49,7 +49,7 @@ const handleChangeIncremento = () => {
 </script>
 
 <template>
-  <div class="my-20 max-w-lg mx-auto bg-white shadow p-10">
+  <div class="my-20 max-w-lg mx-auto rounded-md bg-white shadow p-10">
     <Header />
 
     <div class="flex justify-between mt-10">
