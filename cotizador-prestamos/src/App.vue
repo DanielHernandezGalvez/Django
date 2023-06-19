@@ -1,22 +1,32 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import Header from "./components/Header.vue";
 import Button from "./components/Button.vue";
+import { calcularTotalPagar } from "./utils";
 
 const cantidad = ref(10000);
 const meses = ref(6);
+const total = ref(calcularTotalPagar(cantidad.value, meses.value));
 
 const MIN = 0;
 const MAX = 20000;
 const STEP = 100;
 
-const formatearDinero = computed(() => {
+const formatearDinero = (valor) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
 
-  return formatter.format(cantidad.value);
+  return formatter.format(valor);
+};
+
+watch([cantidad, meses], () => {
+  total.value = calcularTotalPagar(cantidad.value, meses.value);
+});
+
+const pagoMensual = computed(() => {
+  return total.value / meses.value;
 });
 
 const handleChangeDecremento = () => {
@@ -58,7 +68,7 @@ const handleChangeIncremento = () => {
       />
 
       <p class="text-center my-10 text-5xl font-extrabold text-indigo-600">
-        {{ formatearDinero }}
+        {{ formatearDinero(cantidad) }}
       </p>
       <h2 class="text-2xl font-extrabold jtext-gray-500 text-center">
         Elige un <span class="text-indigo-600">Plazo</span> a pagar
@@ -74,13 +84,23 @@ const handleChangeIncremento = () => {
       </select>
     </div>
 
-    <div class="my-5 space-y-3 bg-gray-50 p-5">
+    <div v-if="total > 0" class="my-5 space-y-3 bg-gray-50 p-5">
       <h2 class="text-2xl font-extrabold text-gray-500 text-center">
         Resumen <span class="text-indigo-600">de pagos</span>
       </h2>
-      <p class="text-xl text-gray-500 text-center font-bold">Meses</p>
-      <p class="text-xl text-gray-500 text-center font-bold">Total a pagar:</p>
-      <p class="text-xl text-gray-500 text-center font-bold">Mensuales</p>
+      <p class="text-xl text-gray-500 text-center font-bold">
+        {{ meses }} meses
+      </p>
+      <p class="text-xl text-gray-500 text-center font-bold">
+        Total a pagar: {{ formatearDinero(total) }}
+      </p>
+      <p class="text-xl text-gray-500 text-center font-bold">
+        Mensuales: {{ formatearDinero(pagoMensual) }}
+      </p>
     </div>
+
+    <p v-else class="text-center font-bold text-gray-500">
+      Añade una cantidad y plazo a pagar
+    </p>
   </div>
 </template>
