@@ -4,6 +4,13 @@ const FormularioInicioSesion = () => {
 const [user, setUser] = useState("")
 const [pass, setPass] = useState("")
 
+const onChangeUser = (e) => {
+  setUser(e.target.value)
+}
+const onChangePass = (e) => {
+  setPass(e.target.value)
+}
+
   return (
     <form action=''>
       <p>usuario:  {user}</p>
@@ -15,15 +22,15 @@ const [pass, setPass] = useState("")
           name="usuario" 
           id="usuario" 
           value={user}
-          onChange={(e) => setUser(e.target.value)}
+          onChange={onChangeUser}
           />
         <label htmlFor="usuario">Contraseña</label>
         <input 
-          type="text"  
+          type="password"  
           name="password" 
           id="password" 
           value={pass}
-          onChange={(e) => setPass(e.target.value)}
+          onChange={onChangePass}
           />
         <button type='submit'>Iniciar seseion</button>
       </div>
