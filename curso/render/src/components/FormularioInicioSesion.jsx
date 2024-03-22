@@ -15,7 +15,9 @@ const onChangePass = (e) => {
     <form action=''>
       <p>usuario:  {user}</p>
       <p>contraseña: {pass}</p>
+
       <div>
+
         <label htmlFor="usuario">Usuario</label>
         <input 
           type="text" 
@@ -24,6 +26,7 @@ const onChangePass = (e) => {
           value={user}
           onChange={onChangeUser}
           />
+
         <label htmlFor="usuario">Contraseña</label>
         <input 
           type="password"  
@@ -32,6 +35,7 @@ const onChangePass = (e) => {
           value={pass}
           onChange={onChangePass}
           />
+          
         <button type='submit'>Iniciar seseion</button>
       </div>
     </form>
