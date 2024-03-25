@@ -4,11 +4,19 @@ const FormularioInicioSesion = () => {
 const [user, setUser] = useState("")
 const [pass, setPass] = useState("")
 
-const onChangeUser = (e) => {
-  setUser(e.target.value)
-}
-const onChangePass = (e) => {
-  setPass(e.target.value)
+// const onChangeUser = (e) => {
+//   setUser(e.target.value)
+// }
+// const onChangePass = (e) => {
+//   setPass(e.target.value)
+// }
+
+const onChange = (e) => {
+  if (e.target.name === "usuario") {
+    setUser(e.target.value)
+  } else if( e.target.name === "password") {
+    setPass(e.target.value)
+  }
 }
 
   return (
@@ -24,7 +32,7 @@ const onChangePass = (e) => {
           name="usuario" 
           id="usuario" 
           value={user}
-          onChange={onChangeUser}
+          onChange={onChange}
           />
 
         <label htmlFor="password">Contraseña</label>
@@ -33,7 +41,7 @@ const onChangePass = (e) => {
           name="password" 
           id="password" 
           value={pass}
-          onChange={onChangePass}
+          onChange={onChange}
           />
           
         <button type='submit'>Iniciar seseion</button>
