@@ -21,6 +21,7 @@ const onChange = (e) => {
 
 const onSubmit = (e) => {
   e.preventDefault()
+  e.target.name === "dani" && e.target.name === "123" ? alert("si jalí") : alert(" no jala")
 }
 
   return (
