@@ -27,7 +27,7 @@ const onChangePass = (e) => {
           onChange={onChangeUser}
           />
 
-        <label htmlFor="usuario">Contraseña</label>
+        <label htmlFor="password">Contraseña</label>
         <input 
           type="password"  
           name="password" 
