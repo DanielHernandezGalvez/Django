@@ -19,8 +19,12 @@ const onChange = (e) => {
   }
 }
 
+const onSubmit = (e) => {
+  e.preventDefault()
+}
+
   return (
-    <form action=''>
+    <form action='' onSubmit={onSubmit}>
       <p>usuario:  {user}</p>
       <p>contraseña: {pass}</p>
 
@@ -44,7 +48,10 @@ const onChange = (e) => {
           onChange={onChange}
           />
           
-        <button type='submit'>Iniciar seseion</button>
+        <button 
+          type='submit'
+
+          >Iniciar sesión</button>
       </div>
     </form>
   )
