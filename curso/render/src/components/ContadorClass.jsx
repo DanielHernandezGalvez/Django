@@ -18,7 +18,7 @@ class Contador extends Component {
     disminuir() {
         this.setState((estadoAnterior) => {
             return {
-                contador: estadoAnterior.contador -1
+                contador: estadoAnterior.contador - 1
             }
         })
     }
@@ -27,12 +27,12 @@ class Contador extends Component {
         return (
             <div>
                 <h1>Contador: {this.state.contador}</h1>
-                <button 
+                <button
                     onClick={() => this.incrementar()}
-                    >Incrementar</button>
-                <button 
+                >Incrementar</button>
+                <button
                     onClick={() => this.disminuir()}
-                    >Disminuir</button>
+                >Disminuir</button>
             </div>
         )
     }
