@@ -1,0 +1,26 @@
+name: Auto GitHub Contributions
+
+on:
+  schedule:
+    # Ejecuta el workflow cada 3 horas
+    - cron: "0 */6 * * *"
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Make Changes
+      run: |
+        echo "Contribución realizada el $(date)" >> auto_commit.txt
+
+    - name: Commit Changes
+      run: |
+        git config --global user.name "DanielHernandezGalvez"
+        git config --global user.email "hernandezgalvezalejandro@gmail.com"
+        git add .
+        git commit -m "Contribución automática"
+        git push
