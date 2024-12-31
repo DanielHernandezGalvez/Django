@@ -1,8 +1,8 @@
-name: Auto GitHub Contributions
+name: Tracker
 
 on:
   schedule:
-    # Ejecuta el workflow cada 3 horas
+    #  3 h
     - cron: "0 */6 * * *"
 
 jobs:
@@ -15,12 +15,12 @@ jobs:
 
     - name: Make Changes
       run: |
-        echo "Contribución realizada el $(date)" >> auto_commit.txt
+        echo "consulta del $(date)" >>tracking.txt
 
     - name: Commit Changes
       run: |
         git config --global user.name "DanielHernandezGalvez"
         git config --global user.email "hernandezgalvezalejandro@gmail.com"
         git add .
-        git commit -m "Contribución automática"
+        git commit -m "Se generó correctamente"
         git push
