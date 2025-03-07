@@ -13,14 +13,22 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Make Changes
+    - name: Make Changes and Commit
       run: |
-        echo "consulta del $(date)" >>tracking.txt
+       
+        COMMITS=$(( RANDOM % 5 + 3 ))
 
-    - name: Commit Changes
-      run: |
+        # Configurar el usuario de Git
         git config --global user.name "DanielHernandezGalvez"
         git config --global user.email "hernandezgalvezalejandro@gmail.com"
-        git add .
-        git commit -m "Se generó correctamente"
+
+       
+        for ((i=1; i<=COMMITS; i++))
+        do
+          echo "consulta del $(date)" >>tracking.txt
+          git add .
+          git commit -m "Se generó correctamente commit $i/$COMMITS"
+        done
+
+        # Push de todos los commits
         git push
