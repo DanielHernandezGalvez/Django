@@ -2,33 +2,42 @@ name: Tracker
 
 on:
   schedule:
-    #  3 h
     - cron: "0 */6 * * *"
+
+concurrency:
+  group: tracker-job
+  cancel-in-progress: true
 
 jobs:
   commit:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Make Changes and Commit
-      run: |
+      - name: Make Changes and Commit
+        run: |
        
-        COMMITS=$(( RANDOM % 5 + 3 ))
-
-        # Configurar el usuario de Git
-        git config --global user.name "DanielHernandezGalvez"
-        git config --global user.email "hernandezgalvezalejandro@gmail.com"
+          git config --global user.name "DanielHernandezGalvez"
+          git config --global user.email "hernandezgalvezalejandro@gmail.com"
 
        
-        for ((i=1; i<=COMMITS; i++))
-        do
-          echo "consulta del $(date)" >>tracking.txt
-          git add .
-          git commit -m "Se generó correctamente commit $i/$COMMITS"
-        done
+          COMMITS=$(( RANDOM % 3 ))  # Puede ser 0, 1 o 2
 
-        # Push de todos los commits
-        git push
+     
+          if [[ $COMMITS -eq 0 ]]; then
+            echo "Esta ejecución no generará commits."
+            exit 0
+          fi
+
+       
+          for ((i=1; i<=COMMITS; i++))
+          do
+            echo "consulta del $(date)" >> tracking.txt
+            git add tracking.txt
+            git commit -m "Commit automático $i/$COMMITS: $(date)"
+          done
+
+          # Push de los commits realizados
+          git push
