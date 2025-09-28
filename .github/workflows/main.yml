@@ -36,7 +36,7 @@ jobs:
           do
             echo "consulta del $(date)" >> tracking.txt
             git add tracking.txt
-            git commit -m "Commit automático $i/$COMMITS: $(date)"
+            git commit -m "Petición automática $i/$COMMITS: $(date)"
           done
 
           # Push de los commits realizados
